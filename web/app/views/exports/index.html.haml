@@ -1,0 +1,29 @@
+%h1 Exports
+
+%h2 Create Export
+%form{action: exports_path, method: :post}
+  %label{for: 'employer_id'} Employer ID
+  %select{name: 'employer_id'}
+    - @employer_ids.each do |employer_id|
+      %option{value: employer_id} #{employer_id}
+  %button{type: 'submit'} Create Export
+
+%h2 Current Exports
+%table
+  %tr
+    %th Employer ID
+    %th Export ID
+    %th Last Export
+    %th Last File
+    %th Actions
+  - @exports.each do |export|
+    %tr
+      %td= export.employer_id
+      %td= export.id
+      %td= export.last_export_time
+      %td
+        - unless export.last_file_link.empty?
+          %a{href: export.last_file_link} download file
+      %td
+        %form{action: "/exports/#{export.id}/generate_file", method: 'post'}
+          %button{type: 'submit'} Generate File
