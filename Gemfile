@@ -11,6 +11,10 @@ gem 'shotgun'
 gem 'grape'
 gem 'roar'
 
+# audits
+gem 'mongodb'
+gem 'bson_ext'
+
 #web
 gem 'rails', '4.1.0.rc1'
 gem 'sass-rails', '~> 4.0.1'

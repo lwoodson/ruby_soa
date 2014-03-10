@@ -9,12 +9,15 @@ Proof of concept playground for ruby-based service-oriented architecture.
 * ```cd ruby_soa```
 * ```tar -xzf rabbitmq-server-mac-standalone-3.2.4.tar.gz```
 * ```./rabbitmq_server-3.2.4/sbin/rabbitmq-plugins enable rabbitmq_management```
+* ```tar -xzf mongodb-osx-x86_64-2.4.9.tgz```
+* ```mkdir mongodb-osx-x86-65-2.4.9/db```
 * ```foreman start```
 * Point browser to app ```http://localhost:3000```
 * Point browser to app ```http://localhost:3000/transitions```
 * Point browser to rabbitmq management console (guest:guest): ```http://localhost:15672```
 
 ## Apps & libs
+![Ruby SOA](ruby_soa.jpeg)
 There are a few apps here, as follows:
 
 ### core
@@ -31,3 +34,6 @@ A message-driven ruby service app to log audits into a mongo database.  Receives
 
 ### RabbitMQ
 A message-oriented middleware implementing the AMQP middleware.  Offers multi-model (queue/worker, pub/sub/ rpc), persistence, guaranteed delivery, management console, redundancy, failover, etc.. etc.. etc..
+
+### MongoDB
+Schema document database that we persist audits into.
