@@ -13,7 +13,6 @@ Proof of concept playground for ruby-based service-oriented architecture.
 * ```mkdir mongodb-osx-x86-65-2.4.9/db```
 * ```foreman start```
 * Point browser to app ```http://localhost:3000```
-* Point browser to app ```http://localhost:3000/transitions```
 * Point browser to rabbitmq management console (guest:guest): ```http://localhost:15672```
 
 ## Apps & libs
