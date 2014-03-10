@@ -4,6 +4,7 @@ source "http://rubygems.org"
 gem 'foreman'
 gem 'sqlite3'
 gem 'pry-byebug'
+gem 'bunny'
 
 #api
 gem 'shotgun'

@@ -1,5 +1,6 @@
 require 'sqlite3'
 require 'active_record'
+require 'core/distributed_eventing'
 
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',
@@ -21,7 +22,25 @@ if ActiveRecord::Base.connection.tables.empty?
   end
 end
 
+module ChangePublisher
+  def self.included(base)
+    base.class_exec do
+      after_save :publish_change_event
+    end
+  end
+
+  private
+  def publish_change_event
+    payload = self.attributes.dup
+    payload[:__class__] = self.class
+    publish(JSON.dump(payload))
+    self
+  end
+end
+
 class Export < ActiveRecord::Base
+  include Core::DistributedEventing
+  include ChangePublisher
   has_many :exported_files
   attr_reader :latest_file
   after_initialize :init
@@ -44,6 +63,8 @@ class Export < ActiveRecord::Base
 end
 
 class ExportedFile < ActiveRecord::Base
+  include Core::DistributedEventing
+  include ChangePublisher
   belongs_to :export
   after_initialize :init
   after_find :update_status
