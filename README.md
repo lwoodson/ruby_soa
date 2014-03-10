@@ -1,4 +1,27 @@
 ruby_soa
 ========
 
-POC for SOA with ruby
+Proof of concept playground for ruby-based service-oriented architecture.
+
+## Setup
+
+* ```git clone git@github.com:lwoodson/ruby_soa.git```
+* ```cd ruby_soa```
+* ```tar -xzf rabbitmq-server-mac-standalone-3.2.4.tar.gz```
+* ```./rabbitmq_server-3.2.4/sbin/rabbitmq-plugins enable rabbitmq_management```
+* ```foreman start```
+* Point browser to app ```http://localhost:3000```
+* Point browser to app ```http://localhost:3000/transitions```
+* Point browser to rabbitmq management console (guest:guest): ```http://localhost:15672```
+
+## Apps
+There are a few apps here, as follows:
+
+### web
+A rails web application that runs on port 3000.  Uses Her to map REST models from the exports_rpc service application.  Adds a service layer around Her/rest.  Page to interact with this service is at the app root.
+
+### exports_rpc
+A WS/RPC ruby service app to create exports and generate exported files.  Uses the Grape & Roar gems to provide a REST api.  Uses ActiveRecord and Sqlite3 for persistence.
+
+### RabbitMQ
+A message-oriented middleware implementing the AMQP middleware.  Offers multi-model (queue/worker, pub/sub/ rpc), persistence, guaranteed delivery, management console, redundancy, failover, etc.. etc.. etc..
